@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo</title>
+  <style>
+    .Card {
+      border: 1px solid black;
+      border-radius: 5px;
+      padding: 1em;
+      margin: 10px;
+      width: calc(45% - 20px);
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Users:</h1>
+  <div>
+    <strong>Time:</strong>
+    <span class="time">Not ready...</span>
+  </div>
+  <div id="content"></div>
+  <script id="template1" type="application/template">
+    <div class="Card">
+        <h2>Full Name: {{fullname}}</h2>
+        <h2>Age: {{age}}</h2>
+        <p>
+          <strong>Favorite values:</strong>
+          <br>
+          {{values}}
+        </p>
+    </div>
+  </script>
+  <script>
+  function ready(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', fn);
+    }
+  }
+
+  ready(()=>{
+    let ctime = false;
+    const time0 = performance.now();
+    const container = document.querySelector('#content');
+    const TEMPLATE = document.querySelector('#template1').innerHTML;
+    function drawCard( thing ) {
+      if(!ctime){
+        ctime = true;
+        const time1 = performance.now();
+        document.querySelector('.time').innerHTML = ("Call to first render took " + ((time1 - time0)/1000) + " seconds.");
+      }
+      // console.log('%d is %s %s', thing.id, thing.lastname, thing.lastname);
+      // console.log(thing.id);
+      let template = TEMPLATE;
+      Object.keys(thing).forEach((val) => {
+        template = template.replace('{{'+val+'}}', thing[val]);
+      });
+      template = template.replace('{{fullname}}', thing.name+' '+thing.lastname);
+      const div = document.createElement('div');
+      div.innerHTML = template;
+      container.appendChild(div.querySelector('div'));
+    }
+    const p = fetch('/api/demo.json');
+    p.then((resp)=>resp.json())
+      .then((json)=>{
+        json.forEach(drawCard);
+      });
+  });
+  </script>
+</body>
+</html>
