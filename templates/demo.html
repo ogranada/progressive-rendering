@@ -3,33 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <title>Demo</title>
-  <style>
-    .Card {
-      border: 1px solid black;
-      border-radius: 5px;
-      padding: 1em;
-      margin: 10px;
-      width: calc(45% - 20px);
-      display: inline-block;
-    }
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.css">
+  <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-  <h1>Users:</h1>
-  <div>
-    <strong>Time:</strong>
-    <span class="time">Not ready...</span>
+  <div class="Container">
+      <h1>Users:</h1>
+      <div>
+        <strong>Time:</strong>
+        <span class="time">Not ready...</span>
+      </div>
+      <div id="content" class="grid-x"></div>
   </div>
-  <div id="content"></div>
   <script id="template1" type="application/template">
-    <div class="Card">
+    <div class="cell small-12 medium-6">
+      <div class="Card">
         <h2>Full Name: {{fullname}}</h2>
         <h2>Age: {{age}}</h2>
-        <p>
+        <p class="Card-values">
           <strong>Favorite values:</strong>
           <br>
           {{values}}
         </p>
+        <a href="about.html" class="button">Read More</a>
+      </div>
     </div>
   </script>
   <script defer="true" src="/static/oboe-browser.js"></script>
