@@ -7,6 +7,8 @@ parsing to use Progressive rendering and show the advantages of it.
 # Run Guide
 * Install dependencies:
   > `npm install`
+* Run server:
+  > `node index.js`
 * Open your browser and go to <a href="http://127.0.0.1:8080/slow.html" target="_blank">http://127.0.0.1:8080/slow.html</a> to 
   watch a slow version (without progressive rendering).
 * Open your browser and go to <a href="http://127.0.0.1:8080" target="_blank">http://127.0.0.1:8080</a> to 
